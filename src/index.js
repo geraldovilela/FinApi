@@ -29,4 +29,13 @@ app.post("/account", (request, response) => {
     return response.status(201).send();
 });
 
+app.get("/statements/:cpf", (request, response)=>{
+    const {cpf} = request.params;
+
+    const customer = customers.find((customer)=> customer.cpf === cpf);
+    if(!customer){
+        return response.status(400).json({error:"No customer found."})
+    }
+    return response.status(200).json(customer);
+})
 app.listen(3333);
